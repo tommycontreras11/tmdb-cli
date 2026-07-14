@@ -1,7 +1,14 @@
 import { config } from "./config/index.js"
-import { fetchMoviesCurrentlyPlaying, fetchPopularMovies, fetchTopRatedMovies, fetchUpcomingMovies } from "./helper.js"
+import { fetchMoviesBasedOnType } from "./helper.js"
 
 config.validateEnvVariables()
+
+const movieType = new Map([
+    ["playing", "now_playing"],
+    ["popular", "popular"],
+    ["top", "top_rated"],
+    ["upcoming", "upcoming"]
+])
 
 process.stdin.on("data", async (data) => {
     const input = data.toString().trim().split(" ")
@@ -19,20 +26,14 @@ process.stdin.on("data", async (data) => {
             
             const typeValue = arg[1].replaceAll('"', "")
 
-            const movieHandlers = {
-              playing: fetchMoviesCurrentlyPlaying,
-              popular: fetchPopularMovies,
-              top: fetchTopRatedMovies,
-              upcoming: fetchUpcomingMovies,
-            };
+            const endpoint = movieType.get(typeValue);
 
-            const handler = await movieHandlers[typeValue]
-
-            if (!handler) {
+            if (!endpoint) {
               console.error("Invalid movie type.");
-            } else {
-              handler();
+              return;
             }
+            
+            await fetchMoviesBasedOnType(endpoint);
 
             break
         case "exit":

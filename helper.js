@@ -12,76 +12,10 @@ const validateResponse = (response, data) => {
 
 const API_RESOURCE_PATH = "3/movie";
 
-export const fetchMoviesCurrentlyPlaying = async () => {
+export const fetchMoviesBasedOnType = async (type) => {
   try {
     const response = await fetch(
-      `${config.TMDB_API_URL}/${API_RESOURCE_PATH}/now_playing?language=en-US&page=1`,
-      {
-        headers: {
-          "Content-type": "Application/json",
-          Authorization: `Bearer ${config.TMDB_API_KEY}`,
-        },
-      },
-    );
-
-    const data = await response.json();
-
-    validateResponse(response, data);
-
-    console.log(data);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export const fetchPopularMovies = async () => {
-  try {
-    const response = await fetch(
-      `${config.TMDB_API_URL}/${API_RESOURCE_PATH}/popular?language=en-US&page=1`,
-      {
-        headers: {
-          "Content-type": "Application/json",
-          Authorization: `Bearer ${config.TMDB_API_KEY}`,
-        },
-      },
-    );
-
-    const data = await response.json();
-
-    validateResponse(response, data);
-
-    console.log(data);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export const fetchTopRatedMovies = async () => {
-  try {
-    const response = await fetch(
-      `${config.TMDB_API_URL}/${API_RESOURCE_PATH}/top_rated?language=en-US&page=1`,
-      {
-        headers: {
-          "Content-type": "Application/json",
-          Authorization: `Bearer ${config.TMDB_API_KEY}`,
-        },
-      },
-    );
-
-    const data = await response.json();
-
-    validateResponse(response, data);
-
-    console.log(data);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export const fetchUpcomingMovies = async () => {
-  try {
-    const response = await fetch(
-      `${config.TMDB_API_URL}/${API_RESOURCE_PATH}/upcoming?language=en-US&page=1`,
+      `${config.TMDB_API_URL}/${API_RESOURCE_PATH}/${type}?language=en-US&page=1`,
       {
         headers: {
           "Content-type": "Application/json",

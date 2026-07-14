@@ -1,5 +1,5 @@
 import { config } from "./config/index.js";
-import { getMovieEndpoint, fetchMovies } from "./helper.js";
+import { getMovieEndpoint, fetchMovies, displayMovies } from "./helper.js";
 
 config.validateEnvVariables();
 
@@ -15,7 +15,7 @@ process.stdin.on("data", async (data) => {
         const endpoint = getMovieEndpoint(arg);
 
         const movies = await fetchMovies(endpoint);
-        console.log(movies);
+        displayMovies(movies.results)
       } catch (error) {
         console.error(error.message);
       }

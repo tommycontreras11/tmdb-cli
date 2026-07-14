@@ -57,3 +57,15 @@ export const fetchMovies = async (endpoint) => {
   validateResponse(response, data);
   return data;
 };
+
+export const displayMovies = (movies) => {
+  for (const movie of movies) {
+    console.log("----------------------------------------");
+    console.log(`🎬 ${movie.title}`);
+    console.log(`⭐ ${movie.vote_average}/10 (${movie.vote_count} votes)`);
+    console.log(`📅 ${movie.release_date}`);
+    console.log();
+    console.log(movie.overview);
+    console.log();
+  }
+};

@@ -1,15 +1,47 @@
-export const fetchMoviesCurrentlyPlaying = () => {
-    console.log("Now playing")
-}
+import { config } from "./config/index.js";
 
-export const fetchPopularMovies = () => {
-    console.log("Popular")
-}
+const validateResponse = (response, data) => {
+  if (!response.ok) {
+    throw new Error(data.status_message);
+  }
 
-export const fetchTopRatedMovies = () => {
-    console.log("Top rated")
-}
+  if (data.success === false) {
+    throw new Error(data.status_message);
+  }
+};
 
-export const fetchUpcomingMovies = () => {
-    console.log("Upcoming movies")
-}
+const API_RESOURCE_PATH = "3/movie";
+
+export const fetchMoviesCurrentlyPlaying = async () => {
+  try {
+    const response = await fetch(
+      `${config.TMDB_API_URL}/${API_RESOURCE_PATH}/now_playing?language=en-US&page=1`,
+      {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `Bearer ${config.TMDB_API_KEY}`,
+        },
+      },
+    );
+
+    const data = await response.json();
+
+    validateResponse(response, data);
+
+    console.log(data);
+  } catch (error) {
+    console.log(error.message)
+  }
+};
+
+export const fetchPopularMovies = async () => {
+  console.log("Popular");
+};
+
+export const fetchTopRatedMovies = async () => {
+  console.log("Top rated");
+};
+
+export const fetchUpcomingMovies = async () => {
+  console.log("Upcoming movies");
+};

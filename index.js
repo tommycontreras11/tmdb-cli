@@ -3,7 +3,7 @@ import { fetchMoviesCurrentlyPlaying, fetchPopularMovies, fetchTopRatedMovies, f
 
 config.validateEnvVariables()
 
-process.stdin.on("data", (data) => {
+process.stdin.on("data", async (data) => {
     const input = data.toString().trim().split(" ")
 
     const command = input[0]
@@ -26,7 +26,7 @@ process.stdin.on("data", (data) => {
               upcoming: fetchUpcomingMovies,
             };
 
-            const handler = movieHandlers[typeValue]
+            const handler = await movieHandlers[typeValue]
 
             if (!handler) {
               console.error("Invalid movie type.");

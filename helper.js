@@ -79,5 +79,23 @@ export const fetchTopRatedMovies = async () => {
 };
 
 export const fetchUpcomingMovies = async () => {
-  console.log("Upcoming movies");
+  try {
+    const response = await fetch(
+      `${config.TMDB_API_URL}/${API_RESOURCE_PATH}/upcoming?language=en-US&page=1`,
+      {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `Bearer ${config.TMDB_API_KEY}`,
+        },
+      },
+    );
+
+    const data = await response.json();
+
+    validateResponse(response, data);
+
+    console.log(data);
+  } catch (error) {
+    console.log(error.message);
+  }
 };

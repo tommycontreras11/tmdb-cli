@@ -30,12 +30,30 @@ export const fetchMoviesCurrentlyPlaying = async () => {
 
     console.log(data);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 };
 
 export const fetchPopularMovies = async () => {
-  console.log("Popular");
+  try {
+    const response = await fetch(
+      `${config.TMDB_API_URL}/${API_RESOURCE_PATH}/popular?language=en-US&page=1`,
+      {
+        headers: {
+          "Content-type": "Application/json",
+          Authorization: `Bearer ${config.TMDB_API_KEY}`,
+        },
+      },
+    );
+
+    const data = await response.json();
+
+    validateResponse(response, data);
+
+    console.log(data);
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 export const fetchTopRatedMovies = async () => {

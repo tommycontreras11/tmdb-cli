@@ -1,0 +1,24 @@
+{
+  "name": "tmdb-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tommycontreras11/tmdb-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tommycontreras11/tmdb-cli/issues"
+  },
+  "homepage": "https://github.com/tommycontreras11/tmdb-cli#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

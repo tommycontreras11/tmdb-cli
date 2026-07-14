@@ -29,7 +29,7 @@ process.stdin.on("data", async (data) => {
             const endpoint = movieType.get(typeValue);
 
             if (!endpoint) {
-              console.error("Invalid movie type.");
+              console.error("Invalid movie type. Choose: playing, popular, top, or upcoming.");
               return;
             }
             
